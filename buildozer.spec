@@ -24,14 +24,14 @@ android.archs = arm64-v8a, armeabi-v7a
 android.accept_sdk_license = True
 android.allow_backup = True
 
-# Pin python-for-android to its stable "master" branch (supports Python up to
-# 3.12). Without this, buildozer was defaulting to p4a's "develop" branch,
-# which requires Python 3.14 - a version pip itself has a build-isolation bug
-# on right now, causing every build to fail with an unrelated-looking
-# "ImportError: cannot import name 'BuildDependencyInstallError'" deep in a
-# pip internals import.
-p4a.branch = master
+# Pin python-for-android to its last stable PyPI-released version (not a
+# branch name). "master" was expected to stay on Python <=3.12, but as of
+# this build it's also pulling in Python 3.14 requirements - p4a's "develop"
+# branch had a long backlog of unmerged changes (including 3.14 support) that
+# appear to have since landed on master too. Pinning an exact old release tag
+# avoids that entirely, regardless of what master does going forward.
+p4a.branch = v2024.01.21
 
 [buildozer]
 log_level = 2
-warn_on_root = 1
+warn_on_root = 1warn_on_root = 1
